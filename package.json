@@ -1,0 +1,14 @@
+{
+  "name": "future-letter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Future Letter generative AI web prototype",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2"
+  }
+}

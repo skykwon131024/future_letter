@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Future Letter - 고민 작성</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb bg-orb-a" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-b" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="container">
+    <section class="card">
+      <div class="hero">
+        <p class="eyebrow">Future Letter</p>
+        <h1>10년 후의 나에게 답장을 받아보세요</h1>
+        <p class="subtitle">지금의 고민을 쓰면, 미래의 내가 다정한 편지로 답해줍니다.</p>
+      </div>
+
+      <form id="concern-form" novalidate>
+        <h2 class="section-title">고민 작성</h2>
+        <div class="field">
+          <label for="title">제목 <span class="required">*</span></label>
+          <input id="title" name="title" type="text" maxlength="60" placeholder="예: 취업 준비가 너무 불안해" />
+          <small class="error" id="title-error"></small>
+        </div>
+
+        <div class="field">
+          <label for="content">고민 내용 <span class="required">*</span></label>
+          <textarea id="content" name="content" rows="8" placeholder="현재 상황, 힘든 점, 원하는 방향을 편하게 적어주세요."></textarea>
+          <small class="error" id="content-error"></small>
+        </div>
+
+        <div class="field">
+          <label for="mood">현재 기분 <span class="required">*</span></label>
+          <input id="mood" name="mood" type="text" maxlength="30" placeholder="예: 불안하지만 해보고 싶음" />
+          <small class="error" id="mood-error"></small>
+        </div>
+
+        <div class="field">
+          <label for="question">미래에게 질문</label>
+          <input id="question" name="question" type="text" maxlength="120" placeholder="예: 10년 후의 나는 이 시기를 어떻게 기억할까?" />
+        </div>
+
+        <div class="meta">
+          <span id="draft-status">임시저장 대기 중</span>
+        </div>
+
+        <button id="submit-btn" type="submit" disabled>미래에게 보내기</button>
+      </form>
+
+      <section class="result" id="result" hidden>
+        <h2 class="section-title">미래에서 도착한 편지</h2>
+        <p id="result-date"></p>
+        <div class="envelope" id="envelope">봉투가 열리고 있어요...</div>
+        <article class="letter" id="letter-box" hidden>
+          <p class="letter-to" id="letter-to"></p>
+          <p id="letter-body"></p>
+          <p class="letter-sign" id="letter-sign"></p>
+        </article>
+
+        <div class="result-actions" id="result-actions" hidden>
+          <button type="button" id="save-letter-btn">저장하기</button>
+          <button type="button" id="share-letter-btn" class="secondary">공유하기</button>
+          <button type="button" id="regen-letter-btn" class="secondary">다시 생성</button>
+        </div>
+
+        <a class="capsule-link" href="capsule.html">타임캡슐 페이지로 이동</a>
+
+        <p id="result-summary"></p>
+      </section>
+
+      <a class="capsule-link standalone" href="capsule.html">타임캡슐 보러가기</a>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

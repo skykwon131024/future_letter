@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Future Letter - 타임캡슐</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb bg-orb-a" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-b" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="container">
+    <section class="card capsule" aria-live="polite">
+      <p class="eyebrow">Future Letter</p>
+      <h1>타임캡슐</h1>
+      <p class="capsule-subtitle">저장한 고민과 답장을 날짜순으로 다시 읽어볼 수 있어요.</p>
+
+      <p id="capsule-empty" class="capsule-empty">아직 저장된 기록이 없어요.</p>
+      <ul id="capsule-list" class="capsule-list" hidden></ul>
+
+      <article id="capsule-detail" class="capsule-detail" hidden>
+        <h3 id="capsule-detail-title"></h3>
+        <p id="capsule-detail-meta" class="capsule-detail-meta"></p>
+
+        <div class="capsule-detail-block">
+          <h4>고민 내용</h4>
+          <p id="capsule-detail-content"></p>
+        </div>
+
+        <div class="capsule-detail-block">
+          <h4>AI 답장</h4>
+          <p id="capsule-detail-reply"></p>
+        </div>
+      </article>
+
+      <a class="capsule-link standalone" href="index.html">고민 작성 페이지로 돌아가기</a>
+    </section>
+  </main>
+
+  <script src="capsule.js"></script>
+</body>
+</html>
