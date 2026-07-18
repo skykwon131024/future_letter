@@ -199,6 +199,37 @@ function buildShareText(letter) {
   return `${letterTo.textContent}\n\n${letter.aiReplyText}\n\n${letterSign.textContent}`;
 }
 
+function copyTextWithFallback(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+
+  return new Promise((resolve, reject) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.top = "-9999px";
+    textarea.style.left = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+
+    try {
+      const copied = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      if (!copied) {
+        reject(new Error("copy_failed"));
+        return;
+      }
+      resolve();
+    } catch (error) {
+      document.body.removeChild(textarea);
+      reject(error);
+    }
+  });
+}
+
 [titleInput, contentInput, moodInput, questionInput].forEach((el) => {
   el.addEventListener("input", () => {
     validate(false);
@@ -254,15 +285,23 @@ shareLetterBtn.addEventListener("click", async () => {
       await navigator.share({
         title: "Future Letter",
         text: shareText,
+        url: window.location.href,
       });
       resultSummary.textContent = "공유가 완료되었어요.";
       return;
     }
 
-    await navigator.clipboard.writeText(shareText);
+    await copyTextWithFallback(shareText);
     resultSummary.textContent = "편지 내용을 클립보드에 복사했어요.";
-  } catch {
-    resultSummary.textContent = "공유에 실패했어요. 잠시 후 다시 시도해주세요.";
+  } catch (error) {
+    if (String(error?.name || "") === "AbortError") {
+      resultSummary.textContent = "공유가 취소되었어요.";
+      return;
+    }
+
+    // Last-resort fallback: show the text so users can copy manually.
+    window.prompt("아래 내용을 복사해주세요.", shareText);
+    resultSummary.textContent = "자동 공유가 어려워 수동 복사 창을 열었어요.";
   }
 });
 
